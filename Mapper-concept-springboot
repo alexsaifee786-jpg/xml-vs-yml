@@ -1,0 +1,40 @@
+📘 Part 2: Mapper Concept (MapStruct)
+Definition: Mapper ek aisa tool hai jo ek object (Entity) ke data ko doosre object (DTO) mein transfer karta hai. Ye sensitive data (jaise password) ko client se chhupane mein madad karta hai.
+1. Mapping Tools Comparison Table
+Feature	Manual Mapping	MapStruct	ModelMapper
+How it works?	Code khud likhna padta hai	Interface se code generate hota hai	Runtime par match hota hai
+Performance	Best	Excellent (Fastest)	Average (Slow)
+Error Check	Manual check	Compile-time check	Runtime check
+2. Complete Code Example (Custom Mapping)
+The Objects (Entity & DTO):
+java
+public class User { // Database Entity
+    private String fullName; // Different name
+    private String email;
+    private String password; // Don't want to show
+}
+
+public class UserDTO { // API Object
+    private String name; // Different name
+    private String email;
+}
+Use code with caution.
+
+The Mapper Interface:
+java
+@Mapper
+public interface UserMapper {
+    UserMapper INSTANCE = Mappers.getMapper(UserMapper.class);
+
+    // Agar names alag hain toh aise batate hain:
+    @Mapping(source = "fullName", target = "name") 
+    @Mapping(target = "password", ignore = true) // Password ko ignore karein
+    UserDTO toDTO(User user);
+}
+Use code with caution.
+
+💡 Interview Important Points (Summary)
+YAML Rule: Kabhi Tab use mat karo, hamesha 2 Spaces use karo. Colon : ke baad ek space zaroori hai.
+Why MapStruct? Kyunki ye Compile-time par code likhta hai, isliye ye fast hai aur error pehle hi pakad leta hai.
+Separation of Concerns: Mapper use karne se hamara Business Logic (Service) aur Database Layer alag-alag rehte hain.
+Pro-Tip: In notes ko revise karne ke liye ek baar apne IDE (IntelliJ/VS Code) mein ye code likh kar dekhein, syntax error turant samajh aa jayenge!
