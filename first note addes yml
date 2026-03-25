@@ -1,0 +1,38 @@
+🚀 YAML vs Properties: Comprehensive Guide
+1. Comparison Table (The "Big Picture")
+Feature	application.properties (Flat Style)	application.yml (Hierarchical Style)
+Structure	Linear / Flat lines	Tree-like / Nested structure
+Readability	Hard to read in large files	Very clean and organized
+Repetition	Prefixes (e.g., spring.) are repeated	Prefixes are written once
+Symbols	Uses = to assign values	Uses : followed by a space
+Indentation	Not required	Mandatory (Standard is 2 spaces)
+2. Code Comparison (Side-by-Side)
+application.properties	application.yml
+# Server	# Server
+server.port=8082	server:
+  port: 8082
+# Datasource	# Datasource
+spring.datasource.url=jdbc:mysql://...	spring:
+spring.datasource.username=root	  datasource:
+spring.datasource.password=test	    url: jdbc:mysql://...
+spring.datasource.driver-class-name=com.mysql...	    username: root
+    password: test
+    driver-class-name: com.mysql...
+# JPA	  jpa:
+spring.jpa.hibernate.ddl-auto=update	    hibernate:
+spring.jpa.show-sql=true	      ddl-auto: update
+    show-sql: true
+# Eureka	eureka:
+eureka.client.service-url.defaultZone=http://...	  client:
+eureka.client.fetch-registry=true	    service-url:
+eureka.client.register-with-eureka=true	      defaultZone: http://...
+eureka.instance.prefer-ip-address=true	    fetch-registry: true
+    register-with-eureka: true
+  instance:
+    prefer-ip-address: true
+3. Interview "Must-Know" Points 💡
+Indentation Rule: YAML strictly relies on spaces. If the indentation (gaps) is wrong, the application will crash. Never use the "Tab" key.
+The Space Rule: Always put a space after the colon (key: value).
+Why YAML? It is modern and used by Docker, Kubernetes, and Ansible. Learning YAML is essential for DevOps.
+Grouping: Notice how spring or eureka are only written once at the top level. This makes the file much shorter and easier to manage.
+Tip: Agar aap Spring Boot project mein dono files rakhte hain, toh Spring Boot .properties ko priority deta hai. Isliye hamesha ek hi file format use karein (Preferably .yml for modern apps).
