@@ -1,0 +1,20 @@
+SQL & JPA Optimization Interview Notes 📝
+1. Pagination (Memory Optimization)
+Problem: Fetching millions of records at once crashes the application (Out of Memory).
+Solution: Use Pageable and PageRequest in Spring Data JPA.
+Direct Answer: "I use Pagination to fetch data in small chunks (e.g., 20 records per page), which reduces database load and saves network bandwidth."
+*2. Avoid "Select " (Using Projections)
+Problem: Built-in methods like findAll() fetch every single column from the table.
+Solution: Use JPQL Projections or Interface-based Projections.
+Direct Answer: "Instead of fetching the whole Entity, I use Projections to select only specific columns (e.g., just name and id), which makes the query much faster."
+3. Native Queries (Performance Control)
+Problem: Sometimes JPQL/Hibernate generates complex and slow SQL for nested joins.
+Solution: Write Native SQL Queries (nativeQuery = true).
+Direct Answer: "I use Native Queries for complex reports because they allow me to use database-specific features like Index Hints and optimized Joins that JPQL cannot handle."
+4. The N+1 Problem (Pro Tip)
+Problem: Fetching a Parent (e.g., Order) and its Children (e.g., Items) one by one creates too many DB calls.
+Solution: Use JOIN FETCH in JPQL.
+Direct Answer: "To optimize performance, I use JOIN FETCH to retrieve related data in a single query, avoiding the N+1 database call issue."
+5. Database Indexing
+Concept: Without indexes, the DB does a "Full Table Scan".
+Action: Analyze the query using the EXPLAIN command and add indexes on columns used in WHERE and JOIN clauses.
